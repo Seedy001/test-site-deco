@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paiement sécurisé – Maison Élégante</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .checkout-page { background: var(--color-light); min-height: 100vh; }
+    .checkout-header { background: white; border-bottom: 1px solid var(--color-border); padding: 16px 0; }
+    .checkout-header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .checkout-secure { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--color-success); }
+    .checkout-secure svg { width: 16px; height: 16px; }
+
+    .payment-option { border: 2px solid var(--color-border); border-radius: var(--radius-md); padding: 16px 20px; cursor: pointer; margin-bottom: 12px; transition: all .2s; display: flex; align-items: center; gap: 16px; }
+    .payment-option:hover { border-color: var(--color-primary); }
+    .payment-option.selected { border-color: var(--color-primary); background: rgba(201,169,110,.05); }
+    .payment-radio { width: 20px; height: 20px; border: 2px solid var(--color-border); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+    .payment-option.selected .payment-radio { border-color: var(--color-primary); background: var(--color-primary); }
+    .payment-option.selected .payment-radio::after { content: ''; width: 8px; height: 8px; background: white; border-radius: 50%; }
+    .payment-label { font-weight: 600; font-size: .9rem; }
+    .payment-icons-row { display: flex; gap: 6px; margin-left: auto; }
+    .card-icon { padding: 4px 8px; background: var(--color-light); border: 1px solid var(--color-border); border-radius: 4px; font-size: .7rem; font-weight: 700; }
+
+    .card-fields { margin-top: 16px; padding: 16px; background: var(--color-light); border-radius: var(--radius-md); display: none; }
+    .card-fields.visible { display: block; }
+
+    .secure-badges { display: flex; gap: 16px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .secure-badge { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--color-medium); }
+    .secure-badge svg { width: 16px; height: 16px; color: var(--color-success); }
+  </style>
+</head>
+<body class="checkout-page">
+
+  <header class="checkout-header">
+    <div class="container checkout-header-inner">
+      <a href="../index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4L36 14V26L20 36L4 26V14L20 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="currentColor" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="currentColor"/></svg>
+        <span class="logo-text">Maison <em>Élégante</em></span>
+      </a>
+      <div class="checkout-secure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Paiement 100% sécurisé SSL
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container checkout-layout">
+      <div class="checkout-form-area">
+        <!-- STEPS -->
+        <div class="checkout-steps">
+          <div class="checkout-step completed">
+            <div class="step-num">✓</div>
+            <span class="step-label">Panier</span>
+          </div>
+          <div class="checkout-step active">
+            <div class="step-num">2</div>
+            <span class="step-label">Livraison</span>
+          </div>
+          <div class="checkout-step">
+            <div class="step-num">3</div>
+            <span class="step-label">Paiement</span>
+          </div>
+          <div class="checkout-step">
+            <div class="step-num">4</div>
+            <span class="step-label">Confirmation</span>
+          </div>
+        </div>
+
+        <form id="checkoutForm" novalidate>
+
+          <!-- CONTACT -->
+          <div class="form-section">
+            <h2 class="form-section-title">Informations de contact</h2>
+            <div class="form-grid form-grid-2">
+              <div class="form-group">
+                <label class="form-label required">Prénom</label>
+                <input type="text" class="form-input" id="firstName" placeholder="Marie" autocomplete="given-name" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Nom</label>
+                <input type="text" class="form-input" id="lastName" placeholder="Dupont" autocomplete="family-name" required />
+              </div>
+            </div>
+            <div class="form-grid form-grid-2" style="margin-top:16px;">
+              <div class="form-group">
+                <label class="form-label required">Email</label>
+                <input type="email" class="form-input" id="email" placeholder="marie@email.fr" autocomplete="email" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Téléphone</label>
+                <input type="tel" class="form-input" id="phone" placeholder="+33 6 00 00 00 00" autocomplete="tel" />
+              </div>
+            </div>
+          </div>
+
+          <!-- DELIVERY -->
+          <div class="form-section">
+            <h2 class="form-section-title">Adresse de livraison</h2>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label class="form-label required">Adresse</label>
+              <input type="text" class="form-input" id="address" placeholder="12 rue des Fleurs" autocomplete="street-address" required />
+            </div>
+            <div class="form-grid form-grid-3">
+              <div class="form-group">
+                <label class="form-label required">Code postal</label>
+                <input type="text" class="form-input" id="zip" placeholder="75001" autocomplete="postal-code" required />
+              </div>
+              <div class="form-group" style="grid-column:span 2;">
+                <label class="form-label required">Ville</label>
+                <input type="text" class="form-input" id="city" placeholder="Paris" autocomplete="address-level2" required />
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:16px;">
+              <label class="form-label required">Pays</label>
+              <select class="form-select" id="country" autocomplete="country">
+                <option value="FR" selected>France</option>
+                <option value="BE">Belgique</option>
+                <option value="CH">Suisse</option>
+                <option value="LU">Luxembourg</option>
+                <option value="MC">Monaco</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- SHIPPING METHOD -->
+          <div class="form-section">
+            <h2 class="form-section-title">Mode de livraison</h2>
+            <div class="payment-option selected" id="ship1" onclick="selectShipping('ship1')">
+              <div class="payment-radio"></div>
+              <div>
+                <div class="payment-label">Livraison standard</div>
+                <div style="font-size:.82rem;color:var(--color-medium);">3–5 jours ouvrés · Gratuite dès 150€</div>
+              </div>
+              <span style="margin-left:auto;font-weight:700;color:var(--color-success);">Gratuit</span>
+            </div>
+            <div class="payment-option" id="ship2" onclick="selectShipping('ship2')">
+              <div class="payment-radio"></div>
+              <div>
+                <div class="payment-label">Livraison express</div>
+                <div style="font-size:.82rem;color:var(--color-medium);">48h garanties (jours ouvrés)</div>
+              </div>
+              <span style="margin-left:auto;font-weight:700;">9,90 €</span>
+            </div>
+            <div class="payment-option" id="ship3" onclick="selectShipping('ship3')">
+              <div class="payment-radio"></div>
+              <div>
+                <div class="payment-label">Point relais</div>
+                <div style="font-size:.82rem;color:var(--color-medium);">4–6 jours · Plus de 15 000 points relais</div>
+              </div>
+              <span style="margin-left:auto;font-weight:700;">3,90 €</span>
+            </div>
+          </div>
+
+          <!-- PAYMENT -->
+          <div class="form-section">
+            <h2 class="form-section-title">Mode de paiement</h2>
+            <div class="payment-option selected" id="pay-card" onclick="selectPayment('pay-card')">
+              <div class="payment-radio"></div>
+              <span class="payment-label">Carte bancaire</span>
+              <div class="payment-icons-row">
+                <span class="card-icon">Visa</span>
+                <span class="card-icon">MC</span>
+                <span class="card-icon">Amex</span>
+              </div>
+            </div>
+            <div class="card-fields visible" id="cardFields">
+              <div class="form-group" style="margin-bottom:12px;">
+                <label class="form-label required">Numéro de carte</label>
+                <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" />
+              </div>
+              <div class="form-grid form-grid-2">
+                <div class="form-group">
+                  <label class="form-label required">Date d'expiration</label>
+                  <input type="text" class="form-input" id="cardExpiry" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label required">CVV</label>
+                  <input type="text" class="form-input" id="cardCvv" placeholder="123" maxlength="4" autocomplete="cc-csc" />
+                </div>
+              </div>
+              <div class="alert alert-info" style="margin-top:12px;margin-bottom:0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Paiement crypté 256-bit SSL. Nous ne stockons jamais vos données bancaires.
+              </div>
+            </div>
+
+            <div class="payment-option" id="pay-paypal" onclick="selectPayment('pay-paypal')">
+              <div class="payment-radio"></div>
+              <span class="payment-label">PayPal</span>
+              <span class="card-icon" style="margin-left:auto;">PayPal</span>
+            </div>
+            <div class="payment-option" id="pay-apple" onclick="selectPayment('pay-apple')">
+              <div class="payment-radio"></div>
+              <span class="payment-label">Apple Pay</span>
+              <span class="card-icon" style="margin-left:auto;"> Pay</span>
+            </div>
+            <div class="payment-option" id="pay-3x" onclick="selectPayment('pay-3x')">
+              <div class="payment-radio"></div>
+              <div>
+                <div class="payment-label">Paiement 3× sans frais</div>
+                <div style="font-size:.82rem;color:var(--color-medium);">À partir de 300€ d'achat</div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" id="placeOrderBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Confirmer et payer — <span id="orderAmount">0,00 €</span>
+          </button>
+
+          <div class="secure-badges">
+            <div class="secure-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> SSL 256-bit</div>
+            <div class="secure-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 3D Secure</div>
+            <div class="secure-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> RGPD Conforme</div>
+            <div class="secure-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Données protégées</div>
+          </div>
+        </form>
+      </div>
+
+      <!-- ORDER SUMMARY -->
+      <div class="order-summary">
+        <div class="order-summary-title">Récapitulatif</div>
+
+        <div class="order-items" id="orderItems">
+          <div style="text-align:center;color:var(--color-medium);font-size:.875rem;padding:20px 0;">Votre panier est vide</div>
+        </div>
+
+        <div class="promo-input-group">
+          <input type="text" class="form-input" placeholder="Code promo" id="promoCode" />
+          <button class="btn btn-outline" id="applyPromo">Appliquer</button>
+        </div>
+
+        <div class="order-totals" id="orderTotals">
+          <div class="order-line"><span>Sous-total</span><span id="summarySubtotal">0,00 €</span></div>
+          <div class="order-line"><span>Livraison</span><span id="summaryShipping">Gratuit</span></div>
+          <div class="order-line discount" id="promoLine" style="display:none;"><span>Code promo</span><span id="promoAmount">−0,00 €</span></div>
+        </div>
+
+        <div class="order-total-line">
+          <span>Total TTC</span>
+          <span id="summaryTotal">0,00 €</span>
+        </div>
+
+        <div class="checkout-security" style="margin-top:16px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Achat 100% sécurisé et garanti
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      Cart.init();
+      renderSummary();
+
+      function fmt(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
+
+      function renderSummary() {
+        const items = Cart.items();
+        const total = Cart.total();
+        const oi = document.getElementById('orderItems');
+        if (items.length) {
+          oi.innerHTML = items.map(i => `
+            <div class="order-item">
+              <div class="order-item-img">${i.emoji}<span class="order-item-qty">${i.qty}</span></div>
+              <span class="order-item-name">${i.name}</span>
+              <span class="order-item-price">${fmt(i.price * i.qty)}</span>
+            </div>`).join('');
+        }
+        document.getElementById('summarySubtotal').textContent = fmt(total);
+        document.getElementById('summaryTotal').textContent = fmt(total);
+        document.getElementById('orderAmount').textContent = fmt(total);
+      }
+
+      // Shipping selection
+      window.selectShipping = (id) => {
+        ['ship1','ship2','ship3'].forEach(s => document.getElementById(s)?.classList.remove('selected'));
+        document.getElementById(id)?.classList.add('selected');
+      };
+
+      // Payment selection
+      window.selectPayment = (id) => {
+        ['pay-card','pay-paypal','pay-apple','pay-3x'].forEach(p => document.getElementById(p)?.classList.remove('selected'));
+        document.getElementById(id)?.classList.add('selected');
+        document.getElementById('cardFields')?.classList.toggle('visible', id === 'pay-card');
+      };
+
+      // Card number formatting
+      document.getElementById('cardNumber')?.addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19);
+      });
+      document.getElementById('cardExpiry')?.addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/\D/g, '').replace(/^(.{2})(.*)/, '$1/$2').slice(0, 5);
+      });
+
+      // Promo code
+      document.getElementById('applyPromo')?.addEventListener('click', () => {
+        const code = document.getElementById('promoCode')?.value.toUpperCase();
+        const total = Cart.total();
+        if (code === 'DECO10') {
+          const discount = total * 0.1;
+          document.getElementById('promoLine').style.display = 'flex';
+          document.getElementById('promoAmount').textContent = '−' + fmt(discount);
+          document.getElementById('summaryTotal').textContent = fmt(total - discount);
+          document.getElementById('orderAmount').textContent = fmt(total - discount);
+        } else {
+          alert('Code promo invalide. Essayez "DECO10" pour -10%.');
+        }
+      });
+
+      // Form submission
+      document.getElementById('checkoutForm')?.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = document.getElementById('placeOrderBtn');
+        btn.textContent = 'Traitement en cours...';
+        btn.disabled = true;
+        setTimeout(() => {
+          location.href = 'confirmation.html';
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>

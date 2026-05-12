@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catalogue Maison Élégante - Meubles, vases, luminaires et décoration d'intérieur haut de gamme." />
+  <title>Catalogue – Maison Élégante</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="announcement-bar">
+    <p>Livraison gratuite à partir de 150€ · Retours gratuits sous 30 jours · Paiement sécurisé SSL</p>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="../index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4L36 14V26L20 36L4 26V14L20 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="currentColor" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="currentColor"/></svg>
+        <span class="logo-text">Maison <em>Élégante</em></span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="catalogue.html" class="nav-link" style="color:var(--color-primary)">Catalogue</a></li>
+          <li class="nav-item"><a href="nouveautes.html" class="nav-link">Nouveautés</a></li>
+          <li class="nav-item"><a href="promotions.html" class="nav-link">Promotions</a></li>
+          <li class="nav-item"><a href="pro.html" class="nav-link">Espace Pro</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">Notre histoire</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn search-btn" id="searchBtn" aria-label="Rechercher">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <a href="compte.html" class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <button class="icon-btn cart-btn" id="cartBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Mon Panier (<span id="cartItemCount">0</span>)</h3>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-subtotal"><span>Sous-total</span><span id="cartTotal">0,00 €</span></div>
+      <p class="cart-shipping-note">Livraison gratuite à partir de 150€</p>
+      <a href="checkout.html" class="btn btn-primary btn-full">Passer commande</a>
+      <a href="panier.html" class="btn btn-outline btn-full">Voir le panier</a>
+    </div>
+  </aside>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="../index.html">Accueil</a>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-current" id="breadcrumbCurrent">Catalogue</span>
+        </div>
+        <h1 id="pageTitle">Tous nos produits</h1>
+        <p>Explorez notre sélection de <span id="productCount">2 400</span> pièces de décoration d'exception</p>
+      </div>
+    </section>
+
+    <div class="container catalogue-layout">
+      <!-- SIDEBAR -->
+      <aside class="filters-sidebar">
+        <div class="filters-title">
+          Filtres
+          <button class="btn btn-sm btn-outline" id="clearFilters" style="display:none; margin-left:auto; font-size:.75rem; padding:4px 12px;">Effacer</button>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Catégories</div>
+          <div id="filterCategories"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Prix</div>
+          <div class="price-range-wrap">
+            <div class="price-range-inputs">
+              <input type="number" class="price-input" id="priceMin" placeholder="Min" min="0" />
+              <span class="price-sep">–</span>
+              <input type="number" class="price-input" id="priceMax" placeholder="Max" min="0" />
+            </div>
+            <button class="btn btn-sm btn-outline btn-full" id="applyPrice">Appliquer</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Note minimum</div>
+          <div id="filterRating"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Disponibilité</div>
+          <label class="filter-option">
+            <div class="filter-checkbox"></div>
+            <span>En stock uniquement</span>
+          </label>
+          <label class="filter-option">
+            <div class="filter-checkbox"></div>
+            <span>Livraison rapide (48h)</span>
+          </label>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="catalogue-content">
+        <div class="grid-controls">
+          <div class="results-count"><strong id="visibleCount">8</strong> produits trouvés</div>
+          <div class="grid-controls-right">
+            <select class="sort-select" id="sortSelect">
+              <option value="popular">Les plus populaires</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+              <option value="rating">Mieux notés</option>
+              <option value="new">Plus récents</option>
+            </select>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid" aria-label="Vue grille">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </button>
+              <button class="view-btn" data-view="list" aria-label="Vue liste">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="products-grid" id="catalogueGrid"></div>
+
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding-top:40px;">
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 Maison Élégante. Tous droits réservés.</p>
+        <a href="../index.html" class="btn btn-outline btn-sm">← Retour à l'accueil</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const CATEGORIES = [...new Set(PRODUCTS.map(p => p.category))];
+
+      // Filter categories
+      const filterCats = document.getElementById('filterCategories');
+      CATEGORIES.forEach(cat => {
+        filterCats.innerHTML += `
+          <label class="filter-option" data-cat="${cat}">
+            <div class="filter-checkbox"></div>
+            <span>${cat}</span>
+            <span class="filter-count">${PRODUCTS.filter(p=>p.category===cat).length}</span>
+          </label>`;
+      });
+
+      // Filter ratings
+      const filterRat = document.getElementById('filterRating');
+      [5,4,3].forEach(r => {
+        filterRat.innerHTML += `
+          <label class="filter-option" data-rating="${r}">
+            <div class="filter-checkbox"></div>
+            <span>${'★'.repeat(r)}${'☆'.repeat(5-r)} et plus</span>
+          </label>`;
+      });
+
+      // Toggle filter checkboxes
+      document.querySelectorAll('.filter-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          opt.classList.toggle('checked');
+          applyFilters();
+        });
+      });
+
+      let activeFilters = { cats: [], rating: 0, priceMin: 0, priceMax: Infinity };
+
+      function applyFilters() {
+        activeFilters.cats = [...document.querySelectorAll('[data-cat].checked')].map(el => el.dataset.cat);
+        const ratingEl = document.querySelector('[data-rating].checked');
+        activeFilters.rating = ratingEl ? parseInt(ratingEl.dataset.rating) : 0;
+        renderGrid();
+      }
+
+      document.getElementById('applyPrice')?.addEventListener('click', () => {
+        activeFilters.priceMin = parseFloat(document.getElementById('priceMin').value) || 0;
+        activeFilters.priceMax = parseFloat(document.getElementById('priceMax').value) || Infinity;
+        renderGrid();
+      });
+
+      document.getElementById('sortSelect')?.addEventListener('change', renderGrid);
+
+      // URL params for category pre-selection
+      const params = new URLSearchParams(location.search);
+      const catParam = params.get('cat');
+      if (catParam) {
+        const mapping = { furniture: 'Mobilier', decoration: 'Décoration', lighting: 'Luminaires', textiles: 'Textiles', vases: 'Décoration', tables: 'Mobilier' };
+        const matched = mapping[catParam] || catParam;
+        const catEl = document.querySelector(`[data-cat="${matched}"]`);
+        if (catEl) { catEl.classList.add('checked'); applyFilters(); }
+      }
+
+      function renderGrid() {
+        let items = [...PRODUCTS];
+
+        if (activeFilters.cats.length) items = items.filter(p => activeFilters.cats.includes(p.category));
+        if (activeFilters.rating) items = items.filter(p => p.rating >= activeFilters.rating);
+        items = items.filter(p => p.price >= activeFilters.priceMin && p.price <= activeFilters.priceMax);
+
+        const sort = document.getElementById('sortSelect')?.value || 'popular';
+        if (sort === 'price-asc') items.sort((a,b) => a.price - b.price);
+        else if (sort === 'price-desc') items.sort((a,b) => b.price - a.price);
+        else if (sort === 'rating') items.sort((a,b) => b.rating - a.rating);
+
+        document.getElementById('visibleCount').textContent = items.length;
+
+        const grid = document.getElementById('catalogueGrid');
+        if (!items.length) {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:64px;color:var(--color-medium);">Aucun produit ne correspond à vos filtres.</div>';
+          return;
+        }
+        grid.innerHTML = items.map(p => productCard(p)).join('');
+
+        // Pagination mock
+        const pag = document.getElementById('pagination');
+        pag.innerHTML = `
+          <button class="page-btn page-prev">← Précédent</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span style="padding:0 8px; color:var(--color-medium);">…</span>
+          <button class="page-btn">12</button>
+          <button class="page-btn page-next">Suivant →</button>`;
+      }
+
+      renderGrid();
+
+      // View toggle
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const grid = document.getElementById('catalogueGrid');
+          if (btn.dataset.view === 'list') {
+            grid.style.gridTemplateColumns = '1fr';
+          } else {
+            grid.style.gridTemplateColumns = '';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

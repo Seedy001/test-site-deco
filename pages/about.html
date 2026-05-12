@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notre Histoire – Maison Élégante</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="announcement-bar"><p>Livraison gratuite à partir de 150€ · Retours gratuits sous 30 jours</p></div>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4L36 14V26L20 36L4 26V14L20 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="currentColor" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="currentColor"/></svg>
+        <span class="logo-text">Maison <em>Élégante</em></span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="catalogue.html" class="nav-link">Catalogue</a></li>
+          <li class="nav-item"><a href="pro.html" class="nav-link">Espace Pro</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link" style="color:var(--color-primary)">Notre histoire</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn cart-btn" id="cartBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header"><h3>Mon Panier (<span id="cartItemCount">0</span>)</h3><button class="cart-close" id="cartClose">✕</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none;"><div class="cart-subtotal"><span>Sous-total</span><span id="cartTotal">0,00 €</span></div><a href="checkout.html" class="btn btn-primary btn-full">Passer commande</a></div>
+  </aside>
+
+  <main>
+    <!-- HERO -->
+    <section style="background:linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 100px 0; text-align:center; color:white;">
+      <div class="container">
+        <span class="hero-tag">Notre histoire</span>
+        <h1 style="font-family:var(--font-display);font-size:clamp(2rem,5vw,4rem);margin-bottom:20px;font-weight:700;">
+          Nés d'une passion pour<br/><em style="color:var(--color-primary);">le beau</em>
+        </h1>
+        <p style="color:rgba(255,255,255,.7);font-size:1.1rem;max-width:600px;margin:0 auto;">
+          Depuis 2015, nous sélectionnons les plus belles pièces de décoration du monde entier pour transformer vos intérieurs en havres d'élégance.
+        </p>
+      </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="section story-section">
+      <div class="container story-inner">
+        <div class="story-visual">
+          <div class="story-img-main">
+            <div class="story-placeholder" style="background:linear-gradient(145deg,#e8d5b7,#c9a96e); font-size:6rem; display:flex; align-items:center; justify-content:center;">🏠</div>
+          </div>
+          <div class="story-img-badge"><strong>2015</strong><span>Fondée à Paris</span></div>
+        </div>
+        <div class="story-content">
+          <span class="section-tag">Notre mission</span>
+          <h2 class="section-title">Rendre le design d'exception accessible</h2>
+          <p>Maison Élégante est née d'un constat simple : les plus belles pièces de décoration étaient souvent réservées à une élite. Notre fondatrice, Sophie Leclerc, architecte d'intérieur de formation, a décidé de changer cela.</p>
+          <p>En 10 ans, nous avons référencé plus de 2 400 produits, noué des partenariats avec 180 artisans et créateurs à travers 35 pays, et livré dans toute la France et l'Europe.</p>
+          <ul class="story-values">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Sélection rigoureuse par des experts</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Matériaux durables et éco-responsables</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Commerce équitable avec nos artisans</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section" style="background:var(--color-light);">
+      <div class="container">
+        <div class="section-header centered">
+          <h2 class="section-title">Notre parcours</h2>
+        </div>
+        <div style="max-width:700px;margin:0 auto;position:relative;">
+          <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--color-border);transform:translateX(-50%);"></div>
+          <div style="display:flex;flex-direction:column;gap:48px;">
+            <div style="display:flex;gap:32px;align-items:center;justify-content:flex-end;">
+              <div style="text-align:right;flex:1;">
+                <strong style="color:var(--color-primary);font-size:1.1rem;">2015</strong>
+                <h3 style="font-family:var(--font-display);font-size:1.1rem;margin:4px 0;">Fondation</h3>
+                <p style="font-size:.875rem;color:var(--color-medium);">Ouverture du premier site avec 50 produits sélectionnés à la main par Sophie Leclerc.</p>
+              </div>
+              <div style="width:16px;height:16px;background:var(--color-primary);border-radius:50%;flex-shrink:0;z-index:1;border:3px solid white;box-shadow:0 0 0 2px var(--color-primary);"></div>
+              <div style="flex:1;"></div>
+            </div>
+            <div style="display:flex;gap:32px;align-items:center;">
+              <div style="flex:1;"></div>
+              <div style="width:16px;height:16px;background:var(--color-primary);border-radius:50%;flex-shrink:0;z-index:1;border:3px solid white;box-shadow:0 0 0 2px var(--color-primary);"></div>
+              <div style="flex:1;">
+                <strong style="color:var(--color-primary);font-size:1.1rem;">2017</strong>
+                <h3 style="font-family:var(--font-display);font-size:1.1rem;margin:4px 0;">1 000 clients</h3>
+                <p style="font-size:.875rem;color:var(--color-medium);">Lancement de l'espace professionnel et des premiers partenariats artisanaux au Maroc et en Italie.</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:32px;align-items:center;justify-content:flex-end;">
+              <div style="text-align:right;flex:1;">
+                <strong style="color:var(--color-primary);font-size:1.1rem;">2020</strong>
+                <h3 style="font-family:var(--font-display);font-size:1.1rem;margin:4px 0;">Expansion européenne</h3>
+                <p style="font-size:.875rem;color:var(--color-medium);">Livraison dans 15 pays européens. Lancement de notre programme de fidélité.</p>
+              </div>
+              <div style="width:16px;height:16px;background:var(--color-primary);border-radius:50%;flex-shrink:0;z-index:1;border:3px solid white;box-shadow:0 0 0 2px var(--color-primary);"></div>
+              <div style="flex:1;"></div>
+            </div>
+            <div style="display:flex;gap:32px;align-items:center;">
+              <div style="flex:1;"></div>
+              <div style="width:16px;height:16px;background:var(--color-primary);border-radius:50%;flex-shrink:0;z-index:1;border:3px solid white;box-shadow:0 0 0 2px var(--color-primary);"></div>
+              <div style="flex:1;">
+                <strong style="color:var(--color-primary);font-size:1.1rem;">2026</strong>
+                <h3 style="font-family:var(--font-display);font-size:1.1rem;margin:4px 0;">15 000+ clients</h3>
+                <p style="font-size:.875rem;color:var(--color-medium);">Plus de 2 400 références, 180 partenaires artisans, note Trustpilot 4.9/5.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header centered">
+          <h2 class="section-title">Notre équipe</h2>
+          <p class="section-subtitle">Des passionnés de design au service de vos projets</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+          <div style="text-align:center;">
+            <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:1.8rem;font-weight:700;margin:0 auto 16px;">SL</div>
+            <h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:4px;">Sophie Leclerc</h4>
+            <p style="font-size:.82rem;color:var(--color-primary);font-weight:500;margin-bottom:8px;">Fondatrice & Directrice artistique</p>
+            <p style="font-size:.8rem;color:var(--color-medium);">Architecte d'intérieur, 15 ans d'expérience</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;color:white;font-size:1.8rem;font-weight:700;margin:0 auto 16px;">TM</div>
+            <h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:4px;">Thomas Martin</h4>
+            <p style="font-size:.82rem;color:var(--color-primary);font-weight:500;margin-bottom:8px;">Directeur des achats</p>
+            <p style="font-size:.8rem;color:var(--color-medium);">Sélectionne nos artisans partenaires</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#4facfe,#00f2fe);display:flex;align-items:center;justify-content:center;color:white;font-size:1.8rem;font-weight:700;margin:0 auto 16px;">CB</div>
+            <h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:4px;">Camille Bernard</h4>
+            <p style="font-size:.82rem;color:var(--color-primary);font-weight:500;margin-bottom:8px;">Responsable Espace Pro</p>
+            <p style="font-size:.8rem;color:var(--color-medium);">Accompagne nos clients professionnels</p>
+          </div>
+          <div style="text-align:center;">
+            <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#43e97b,#38f9d7);display:flex;align-items:center;justify-content:center;color:white;font-size:1.8rem;font-weight:700;margin:0 auto 16px;">LR</div>
+            <h4 style="font-family:var(--font-display);font-weight:600;margin-bottom:4px;">Lucas Rousseau</h4>
+            <p style="font-size:.82rem;color:var(--color-primary);font-weight:500;margin-bottom:8px;">Responsable logistique</p>
+            <p style="font-size:.8rem;color:var(--color-medium);">Garantit la livraison de vos commandes</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="newsletter-section">
+      <div class="container" style="text-align:center;">
+        <h2 style="font-family:var(--font-display);font-size:2rem;color:white;margin-bottom:16px;">Prêt à transformer votre intérieur ?</h2>
+        <p style="color:rgba(255,255,255,.7);margin-bottom:32px;">Découvrez notre catalogue de plus de 2 400 pièces sélectionnées avec soin.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <a href="catalogue.html" class="btn btn-primary btn-lg">Explorer le catalogue</a>
+          <a href="pro.html" class="btn btn-ghost btn-lg">Espace Professionnels</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" style="padding-top:40px;">
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 Maison Élégante. Tous droits réservés.</p>
+        <a href="../index.html" class="btn btn-outline btn-sm">← Retour à l'accueil</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>
