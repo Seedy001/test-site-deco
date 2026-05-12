@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commande confirmée – Maison Élégante</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    .confirmation-page { min-height: 100vh; background: var(--color-light); display: flex; flex-direction: column; }
+    .confirmation-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+    .confirmation-card { background: white; border-radius: var(--radius-xl); padding: 60px 48px; max-width: 640px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid var(--color-border); }
+    .check-circle { width: 80px; height: 80px; background: linear-gradient(135deg, var(--color-success), #52b788); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; box-shadow: 0 12px 32px rgba(45,106,79,.3); }
+    .check-circle svg { width: 40px; height: 40px; color: white; }
+    .order-number { display: inline-block; background: var(--color-light); padding: 8px 20px; border-radius: 20px; font-size: .875rem; font-weight: 600; color: var(--color-medium); margin-bottom: 24px; border: 1px solid var(--color-border); }
+    .confirmation-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 16px; }
+    .confirmation-text { color: var(--color-medium); line-height: 1.8; margin-bottom: 36px; }
+    .tracking-steps { display: flex; justify-content: center; gap: 0; margin-bottom: 40px; }
+    .track-step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; position: relative; }
+    .track-step::before { content: ''; position: absolute; top: 16px; left: 50%; width: 100%; height: 2px; background: var(--color-border); z-index: 0; }
+    .track-step:last-child::before { display: none; }
+    .track-dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--color-border); background: white; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; z-index: 1; }
+    .track-step.done .track-dot { background: var(--color-success); border-color: var(--color-success); color: white; }
+    .track-step.active .track-dot { background: var(--color-primary); border-color: var(--color-primary); color: white; }
+    .track-label { font-size: .75rem; color: var(--color-medium); text-align: center; }
+    .track-step.done .track-label, .track-step.active .track-label { color: var(--color-dark); font-weight: 600; }
+  </style>
+</head>
+<body class="confirmation-page">
+
+  <header class="site-header" style="position:static;">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none"><path d="M20 4L36 14V26L20 36L4 26V14L20 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M20 12L28 17V23L20 28L12 23V17L20 12Z" fill="currentColor" opacity="0.3"/><circle cx="20" cy="20" r="3" fill="currentColor"/></svg>
+        <span class="logo-text">Maison <em>Élégante</em></span>
+      </a>
+    </div>
+  </header>
+
+  <main class="confirmation-main">
+    <div class="confirmation-card">
+      <div class="check-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <span class="order-number">Commande #ME-2026-<span id="orderNum"></span></span>
+      <h1 class="confirmation-title">Merci pour votre commande !</h1>
+      <p class="confirmation-text">
+        Votre paiement a été accepté et votre commande est en cours de traitement.
+        Vous recevrez un email de confirmation avec votre facture et votre numéro de suivi dès l'expédition.
+      </p>
+
+      <div class="tracking-steps">
+        <div class="track-step done">
+          <div class="track-dot">✓</div>
+          <span class="track-label">Commande<br/>confirmée</span>
+        </div>
+        <div class="track-step active">
+          <div class="track-dot">2</div>
+          <span class="track-label">En cours<br/>de préparation</span>
+        </div>
+        <div class="track-step">
+          <div class="track-dot">3</div>
+          <span class="track-label">Expédié</span>
+        </div>
+        <div class="track-step">
+          <div class="track-dot">4</div>
+          <span class="track-label">Livré</span>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:24px;">
+        <a href="../index.html" class="btn btn-primary">Retour à l'accueil</a>
+        <a href="catalogue.html" class="btn btn-outline">Continuer mes achats</a>
+      </div>
+
+      <div style="background:var(--color-light);border-radius:var(--radius-md);padding:20px;display:flex;align-items:center;gap:12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:24px;height:24px;flex-shrink:0;color:var(--color-primary);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6A16 16 0 0 0 12 15.91l.5-.48a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 19 18v1l3-2.08z"/></svg>
+        <p style="font-size:.875rem;text-align:left;color:var(--color-medium);margin:0;">
+          Besoin d'aide ? Contactez notre service client au <strong>01 23 45 67 89</strong> (Lun–Sam 9h–19h) ou par email à <strong>contact@maison-elegante.fr</strong>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('orderNum').textContent = Math.floor(Math.random() * 90000 + 10000);
+    localStorage.removeItem('me_cart');
+  </script>
+</body>
+</html>
